@@ -1,0 +1,125 @@
+{ 
+    "layer": "top",
+    "position": "top",
+    "modules-left": ["sway/workspaces" ],
+    "modules-center": ["clock"],
+    "modules-right": [
+        "battery",
+        "pulseaudio",
+        "backlight",
+        "cpu",
+        "network",
+        "bluetooth",
+        "custom/mullvad",
+        "custom/pomodoro",
+        "custom/sunset"
+    ],
+
+    "battery": {
+        "interval": 30,
+        "states": {
+            "warning": 15,
+            "critical": 10
+        },
+        "format-charging": "󰂄 {capacity}%",
+        "format": "{icon}",
+        "format-icons": ["󱃍", "󰁺", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "tooltip-format": "Battery: {capacity}%"
+    },
+
+    "clock": {
+        "interval": 60,
+        "format": "{:%H:%M}",
+        "tooltip": true,
+        "tooltip-format": "<big>{:%A %d %B %Y}</big>",
+        "on-click": "swaymsg exec \\$calendar"
+    },
+
+    "cpu": {
+        "interval": 10,
+        "format": "",
+        "states": {
+            "warning": 70,
+            "critical": 90
+        },
+        "on-click": "swaymsg exec \\$once \\$term_float watch sensors",
+        "tooltip": true
+    },
+
+    "network": {
+        "interval": 5,
+        "format-wifi": " ",
+        "format-ethernet": "󰈀",
+        "format-disconnected": "󰖪",
+        "tooltip-format": "{icon} {ifname}: {ipaddr}",
+        "tooltip-format-ethernet": "{icon} {ifname}: {ipaddr}",
+        "tooltip-format-wifi": "{icon} {ifname} ({essid}): {ipaddr}",
+        "tooltip-format-disconnected": "{icon} disconnected",
+        "tooltip-format-disabled": "{icon} disabled",
+        "on-click": "swaymsg exec \\$once \\$term_float nmtui connect"
+    },
+
+    "backlight": {
+        "format": "{icon}  {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "on-scroll-up": "swaymsg exec \\$brightness_up",
+        "on-scroll-down": "swaymsg exec \\$brightness_down"
+    },
+
+    "pulseaudio": {
+        "scroll-step": 5,
+        "format": "{icon} {volume}%{format_source}",
+        "format-muted": "󰖁 {format_source}",
+        "format-source": "",
+        "format-source-muted": " 󰍭",
+        "format-icons": {
+            "headphone": "󰋋",
+            "headset": "󰋎",
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "tooltip-format": "{icon}  {volume}% {format_source}",
+        "on-click": "swaymsg exec pavucontrol",
+        "on-click-middle": "swaymsg exec \\$volume_mute",
+        "on-scroll-up": "swaymsg exec \\$volume_up",
+        "on-scroll-down": "swaymsg exec \\$volume_down"
+    },
+
+    "bluetooth": {
+        "format": "󰂯",
+        "format-disabled": "󰂲",
+        "on-click": "swaymsg exec \\$bluetooth",
+        "on-click-right": "rfkill toggle bluetooth",
+        "tooltip-format": "{}"
+    },
+
+    "custom/sunset": {
+        "interval": "once",
+        "tooltip": true,
+        "return-type": "json",
+        "format": "{icon}",
+        "format-icons": {
+            "on": "󰌵",
+            "off": "󰌶"
+        },
+        "exec": "fallback_latitude=50.1 fallback_longitude=8.7 latitude= longitude= /usr/share/sway/scripts/sunset.sh",
+        "on-click": "/usr/share/sway/scripts/sunset.sh toggle; pkill -RTMIN+6 waybar",
+        "exec-if": "/usr/share/sway/scripts/sunset.sh check",
+        "signal": 6
+    },
+    
+    "custom/mullvad": {
+        "exec": "$HOME/Code/waybar-modules/mullvad-module/target/release/mullvad-module",
+        "interval": "once",
+        "return-type": "json",
+        "format": "{icon}",
+        "format-icons": {
+            "on": "󰌆",
+            "off": "󰌆"
+        },        
+        "return-type": "json",
+        "tooltip": true,
+        "on-click": "$HOME/Code/waybar-modules/mullvad-module/target/release/mullvad-module -t; pkill -RTMIN+9 waybar",
+        "on-click-right": "mullvad-vpn",
+        "signal": 9
+    }
+}

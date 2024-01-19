@@ -1,0 +1,17 @@
+# theme variables
+include $HOME/.config/sway/themes/main_theme
+
+# user variables
+include $HOME/.config/sway/definitions.d/*.conf
+
+# inputs config
+include $HOME/.config/sway/inputs/*
+
+# output config
+include $HOME/.config/sway/outputs/*
+
+# enable modes
+include $HOME/.config/sway/modes/*
+
+# user config
+include $HOME/.config/sway/config.d/*.conf

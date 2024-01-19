@@ -1,0 +1,67 @@
+@import "colors.css";
+
+* {
+  font-size: 16px;
+  /* font-family: "JetBrainsMono Nerd Font"; */
+}
+
+window#waybar {
+  background: transparent;
+}
+
+/* Workspaces */
+#workspaces {
+  background-color: transparent;
+  margin: 3px 0;
+}
+
+#workspaces button {
+  color: @surface2;
+}
+
+#workspaces button.active {
+  color: @overlay1;
+}
+
+#workspaces button.focused {
+  color: @base;
+}
+
+#workspaces button:hover {
+  color: @overlay2;
+}
+
+#clock, #custom-mullvad, #cpu, #bluetooth, #custom-sunset, #network, #backlight, #battery, #pulseaudio {
+  color: @text;
+  font-size: 16px;
+  padding: 0 15px;
+  background-color: transparent;
+  margin: 5px 0;
+}
+
+#clock {
+  border-radius: 0 20px 20px 0;
+}
+
+#battery {
+  color: @green;
+  border-radius: 20px 0 0 20px;
+  margin-right: 0;
+  border-left: 0;
+}
+
+#pulseaudio.muted {
+    color: @red;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#custom-mullvad.off{
+    color: @text;
+}
+
+#custom-mullvad.on{
+    color: @red;
+}

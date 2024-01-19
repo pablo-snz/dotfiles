@@ -1,0 +1,10 @@
+python-pynvim
+neovim
+rofi
+alacritty
+nautilus
+gnome-themes-extra
+foot
+mako
+pavucontrol
+pactl
